@@ -14,7 +14,7 @@ const carritosApi = new ContenedorArchivo("dbCarritos.json");
 //--------------------------------------------
 // permisos de administrador MIDDLEWARES
 
-const esAdmin = false;
+const esAdmin = true;
 
 function crearErrorNoEsAdmin(ruta, metodo) {
   const error = {
@@ -75,7 +75,14 @@ carritosRouter.delete("/:id", async (req, res) => {
   res.json(await carritosApi.borrar(req.params.id));
 });
 
-carritosRouter.get("/:id/productos", async (req, res) => {});
+carritosRouter.get("/:id/productos", async (req, res) => {
+  const carrito = await carritosApi.listar(req.params.id);
+  res.json(carrito.productos);
+});
+
+carritosRouter.post("/:id/productos", async (req, res) => {});
+
+carritosRouter.delete("/:id/productos/:id_prod", async (req, res) => {});
 
 //--------------------------------------------
 // configuro el servidor

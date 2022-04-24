@@ -26,7 +26,7 @@ class ContenedorArchivo {
     }
   }
 
-  async guardar({ title, price, thumbnail }) {
+  async guardar(obj) {
     try {
       let resultado = await this.listarAll();
 
@@ -35,10 +35,9 @@ class ContenedorArchivo {
         ids = resultado[resultado.length - 1].id + 1;
       }
 
-      resultado.push({ title, price, thumbnail, id: ids });
+      resultado.push({ ...obj, id: ids });
 
       await fs.writeFile(`${this.ruta}`, JSON.stringify(resultado));
-      return console.log(resultado);
     } catch (err) {
       console.log(`Error al guardar el Item: ${err}`);
     }
@@ -47,11 +46,12 @@ class ContenedorArchivo {
   async actualizar(elem, id) {}
 
   async borrar(id) {
-    const elements = this.listarAll().filter(
-      (el) => parseInt(el.id) != parseInt(id)
-    );
-    this.borrarAll();
-    this.guardar(elements);
+    let elements = await this.listarAll();
+    const element = elements.find((el) => el.id === id);
+    const index = elements.indexOf(element);
+    elements.splice(index, 1);
+
+    await fs.writeFile(`${this.ruta}`, JSON.stringify(elements));
   }
 
   async borrarAll() {

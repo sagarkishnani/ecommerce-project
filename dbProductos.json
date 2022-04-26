@@ -1,1 +1,20 @@
-[{"title":"Mayonesa","price":"10","thumbnail":"https://wongfood.vteximg.com.br/arquivos/ids/428703-750-750/frontal-531.jpg?v=637537824116870000","id":1},{"title":"Ketchup","price":"14","thumbnail":"https://wongfood.vteximg.com.br/arquivos/ids/428707-750-750/frontal-548.jpg?v=637537824128730000","id":2},{"title":"Mostaza","price":"20","thumbnail":"https://www.corporacionliderperu.com/shop/37698-large_default/a-la-cena-mostaza-x-220-gr.jpg","id":3}]
+[
+  {
+    "title": "Mayonesa",
+    "price": "10",
+    "thumbnail": "https://wongfood.vteximg.com.br/arquivos/ids/428703-750-750/frontal-531.jpg?v=637537824116870000",
+    "id": 1
+  },
+  {
+    "title": "Ketchup",
+    "price": "14",
+    "thumbnail": "https://wongfood.vteximg.com.br/arquivos/ids/428707-750-750/frontal-548.jpg?v=637537824128730000",
+    "id": 2
+  },
+  {
+    "title": "Mostaza",
+    "price": "20",
+    "thumbnail": "https://www.corporacionliderperu.com/shop/37698-large_default/a-la-cena-mostaza-x-220-gr.jpg",
+    "id": 3
+  }
+]

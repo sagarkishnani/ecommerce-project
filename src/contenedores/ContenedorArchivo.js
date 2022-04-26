@@ -43,7 +43,14 @@ class ContenedorArchivo {
     }
   }
 
-  async actualizar(elem, id) {}
+  async actualizar(elem, id) {
+    try {
+      let elements = await this.listarAll();
+
+      const foundIndex = elements.findIndex((x) => x.id == elem.id);
+      elements[foundIndex] = elem;
+    } catch (error) {}
+  }
 
   async borrar(id) {
     let elements = await this.listarAll();

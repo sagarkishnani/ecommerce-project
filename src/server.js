@@ -80,14 +80,18 @@ carritosRouter.get("/:id/productos", async (req, res) => {
   res.json(carrito.productos);
 });
 
-carritosRouter.post("/:id/productos", async (req, res) => {
+carritosRouter.put("/:id/productos", async (req, res) => {
   const carrito = await carritosApi.listar(req.params.id);
   const producto = await productosApi.listar(req.body.id);
 
-  res.json({ id: await carritosApi.guardar({ producto }) });
+  res.json(await carritosApi.actualizar(producto, carrito));
 });
 
-carritosRouter.delete("/:id/productos/:id_prod", async (req, res) => {});
+carritosRouter.delete("/:id/productos/:id_prod", async (req, res) => {
+  const carrito = await carritosApi.listar(req.params.id);
+  const producto = await productosApi.listar(req.body.id);
+  res.json(await carritosApi.borrar(producto));
+});
 
 //--------------------------------------------
 // configuro el servidor

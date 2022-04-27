@@ -1,20 +1,22 @@
 [
   {
+    "id": 1,
+    "timestamp": 1651071838663,
+    "title": "Arroz",
+    "description": "Arroz blanco de 12kg",
+    "code": "A001",
+    "pic": "https://wongfood.vteximg.com.br/arquivos/ids/254547-1000-1000/Arroz-Extra-Coste%C3%B1o-Bolsa-5-Kg-1-4455.jpg?v=636765120201500000",
+    "price": "12",
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "timestamp": 1651071888617,
     "title": "Mayonesa",
+    "description": "Mayonesa de 500gr",
+    "code": "A002",
+    "pic": "https://wongfood.vteximg.com.br/arquivos/ids/445515-1000-1000/Mayonesa-La-Mayo-MT-Doy-Pack-500-g-1-208740473.jpg?v=637592875271000000",
     "price": "10",
-    "thumbnail": "https://wongfood.vteximg.com.br/arquivos/ids/428703-750-750/frontal-531.jpg?v=637537824116870000",
-    "id": 1
-  },
-  {
-    "title": "Ketchup",
-    "price": "14",
-    "thumbnail": "https://wongfood.vteximg.com.br/arquivos/ids/428707-750-750/frontal-548.jpg?v=637537824128730000",
-    "id": 2
-  },
-  {
-    "title": "Mostaza",
-    "price": "20",
-    "thumbnail": "https://www.corporacionliderperu.com/shop/37698-large_default/a-la-cena-mostaza-x-220-gr.jpg",
-    "id": 3
+    "stock": 3
   }
 ]

@@ -35,7 +35,9 @@ class ContenedorArchivo {
         ids = resultado[resultado.length - 1].id + 1;
       }
 
-      resultado.push({ ...obj, id: ids });
+      const timestamp = Date.now();
+
+      resultado.push({ id: ids, timestamp: timestamp, ...obj });
 
       await fs.writeFile(`${this.ruta}`, JSON.stringify(resultado));
     } catch (err) {
@@ -47,8 +49,10 @@ class ContenedorArchivo {
     try {
       let elements = await this.listarAll();
 
-      const foundIndex = elements.findIndex((x) => x.id == elem.id);
+      const foundIndex = elements.findIndex((el) => el.id == elem.id);
       elements[foundIndex] = elem;
+
+      await fs.writeFile(`${this.ruta}`, JSON.stringify(elem));
     } catch (error) {}
   }
 

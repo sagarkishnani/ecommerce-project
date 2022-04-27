@@ -1,1 +1,7 @@
-[{ "productos": [], "id": 1 }]
+[
+  {
+    "productos": [],
+    "id": 1
+  },
+  { "productos": [], "id": 2 }
+]

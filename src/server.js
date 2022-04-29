@@ -58,6 +58,10 @@ productosRouter.put("/:id", soloAdmins, async (req, res) => {
   res.json(await productosApi.actualizar(req.body, req.params.id));
 });
 
+productosRouter.delete("/:id", soloAdmins, async (req, res) => {
+  res.json(await productosApi.borrar(req.params.id));
+});
+
 //--------------------------------------------
 // configuro router de carritos
 
@@ -80,17 +84,24 @@ carritosRouter.get("/:id/productos", async (req, res) => {
   res.json(carrito.productos);
 });
 
-carritosRouter.put("/:id/productos", async (req, res) => {
+carritosRouter.post("/:id/productos", async (req, res) => {
   const carrito = await carritosApi.listar(req.params.id);
   const producto = await productosApi.listar(req.body.id);
 
-  res.json(await carritosApi.actualizar(producto, carrito));
+  carrito.productos.push(producto);
+
+  res.json(await carritosApi.actualizar(carrito, carrito.id));
 });
 
 carritosRouter.delete("/:id/productos/:id_prod", async (req, res) => {
   const carrito = await carritosApi.listar(req.params.id);
-  const producto = await productosApi.listar(req.body.id);
-  res.json(await carritosApi.borrar(producto));
+  const producto = await productosApi.listar(req.params.id);
+
+  const element = carrito.productos.find((el) => el.id === producto.id);
+  const index = carrito.productos.indexOf(element);
+  carrito.productos.splice(index, 1);
+
+  res.json(await carritosApi.actualizar(carrito, carrito.id));
 });
 
 //--------------------------------------------

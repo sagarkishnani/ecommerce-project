@@ -49,11 +49,19 @@ class ContenedorArchivo {
     try {
       let elements = await this.listarAll();
 
-      const foundIndex = elements.findIndex((el) => el.id == elem.id);
-      elements[foundIndex] = elem;
+      const timestamp = Date.now();
 
-      await fs.writeFile(`${this.ruta}`, JSON.stringify(elem));
-    } catch (error) {}
+      const foundIndex = elements.findIndex((el) => el.id == id);
+
+      if (foundIndex !== -1) {
+        elements[foundIndex] = { id, timestamp, ...elem };
+        await fs.writeFile(`${this.ruta}`, JSON.stringify(elements));
+      } else {
+        console.log("Hubo un error al buscar el elemento");
+      }
+    } catch (error) {
+      console.log(`Error al guardar el Item: ${err}`);
+    }
   }
 
   async borrar(id) {

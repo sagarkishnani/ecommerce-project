@@ -1,4 +1,4 @@
-const { promises: fs } = require("fs");
+import { promises as fs } from "fs";
 
 class ContenedorArchivo {
   constructor(ruta) {
@@ -82,4 +82,4 @@ class ContenedorArchivo {
   }
 }
 
-module.exports = ContenedorArchivo;
+export default ContenedorArchivo;

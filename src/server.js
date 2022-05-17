@@ -1,15 +1,15 @@
-const express = require("express");
+import express from "express";
 const { Router } = express;
 
-const ContenedorArchivo = require("./contenedores/ContenedorArchivo.js");
+import {
+  productosDao as productosApi,
+  carritosDao as carritosApi,
+} from "./daos/index.js";
 
 //--------------------------------------------
 // instancio servidor y persistencia
 
 const app = express();
-
-const productosApi = new ContenedorArchivo("dbProductos.json");
-const carritosApi = new ContenedorArchivo("dbCarritos.json");
 
 //--------------------------------------------
 // permisos de administrador MIDDLEWARES
@@ -114,4 +114,4 @@ app.use(express.static("public"));
 app.use("/api/productos", productosRouter);
 app.use("/api/carritos", carritosRouter);
 
-module.exports = app;
+export default app;

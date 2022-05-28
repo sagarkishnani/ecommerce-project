@@ -1,15 +1,16 @@
 import mongoose from "mongoose";
 import config from "../config.js";
 
+await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options);
+
 class ContenedorMongoDb {
-  constructor(config, coll) {
-    this.mongoose = mongoose(config);
-    this.coll = coll;
+  constructor(collection, schema) {
+    this.collection = mongoose.model(collection, schema);
   }
 
   async listar(id) {
     try {
-      let elem = await this.coll.find({ _id: id });
+      let elem = await this.collection.find({ _id: id });
       return elem;
     } catch (error) {
       throw new Error(`Error al listar por id: ${error}`);
@@ -18,7 +19,7 @@ class ContenedorMongoDb {
 
   async listarAll() {
     try {
-      let elem = await this.coll.find({});
+      let elem = await this.collection.find({});
       return elem;
     } catch (error) {
       throw new Error(`Error al listar ${error}`);
@@ -27,7 +28,7 @@ class ContenedorMongoDb {
 
   async guardar(elem) {
     try {
-      return await this.coll.insertOne(elem);
+      return await this.collection.insertOne(elem);
     } catch (error) {
       throw new Error(`Error al guardar: ${error}`);
     }
@@ -35,7 +36,7 @@ class ContenedorMongoDb {
 
   async actualizar(elem, id) {
     try {
-      return await this.coll.updateOne({ _id: id }, { $set: { elem } });
+      return await this.collection.updateOne({ _id: id }, { $set: { elem } });
     } catch (error) {
       throw new Error(`Error al borrar: ${error}`);
     }
@@ -43,7 +44,7 @@ class ContenedorMongoDb {
 
   async borrar(id) {
     try {
-      return await this.coll.deleteOne({ _id: id });
+      return await this.collection.deleteOne({ _id: id });
     } catch (error) {
       throw new Error(`Error al borrar: ${error}`);
     }
@@ -51,14 +52,14 @@ class ContenedorMongoDb {
 
   async borrarAll() {
     try {
-      return await this.coll.remove({});
+      return await this.collection.remove({});
     } catch (error) {
       throw new Error(`Error al borrar: ${error}`);
     }
   }
 
   async desconectar() {
-    await this.mongoose.disconnect();
+    await mongoose.disconnect();
   }
 }
 

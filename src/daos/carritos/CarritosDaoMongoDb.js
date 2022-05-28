@@ -1,8 +1,8 @@
 import ContenedorMongoDb from "../../contenedores/ContenedorMongoDb.js";
 
 class CarritosDaoMongoDb extends ContenedorMongoDb {
-  constructor() {
-    super(config.firebase, config.firebase);
+  async guardar(carrito = { productos: [] }) {
+    return super.guardar(carrito);
   }
 }
 

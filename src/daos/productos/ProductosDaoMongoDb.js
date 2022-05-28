@@ -1,8 +1,16 @@
+import mongoose from "mongoose";
 import ContenedorMongoDb from "../../contenedores/ContenedorMongoDb.js";
 
 class ProductosDaoMongoDb extends ContenedorMongoDb {
   constructor() {
-    super(config.firebase, config.firebase);
+    super(
+      "productos",
+      new mongoose.Schema({
+        title: { type: String, required: true },
+        price: { type: Number, required: true },
+        thumbnail: { type: String, required: true },
+      })
+    );
   }
 }
 

@@ -1,15 +1,21 @@
 import admin from "firebase-admin";
 import config from "../config.js";
 
+admin.initializeApp({
+  credential: admin.credential.cert(config.firebase.uri),
+  databaseURL: "https://ecommerce-project-d3583.firebaseio.com",
+});
+
+const db = admin.firestore();
+
 class ContenedorFirebase {
-  constructor(config, coll) {
-    this.firebase = firebase(config);
-    this.coll = coll;
+  constructor(collection) {
+    this.collection = db.collection(collection);
   }
 
   async listar(id) {
     try {
-      const doc = this.coll.doc(`${id}`);
+      const doc = this.collection.doc(`${id}`);
       const item = await doc.get();
       const response = item.data();
       return response;
@@ -20,7 +26,7 @@ class ContenedorFirebase {
 
   async listarAll() {
     try {
-      const querySnapshot = await this.coll.get();
+      const querySnapshot = await this.collection.get();
       let docs = querySnapshot.docs;
       return docs;
     } catch (error) {
@@ -30,7 +36,15 @@ class ContenedorFirebase {
 
   async guardar(elem) {
     try {
-      const doc = query.doc(`${id}`);
+      const querySnapshot = await this.collection.get();
+      let docs = querySnapshot.docs;
+      let newId;
+      if (docs.length == 0) {
+        newId = 1;
+      } else {
+        newId = newId++;
+      }
+      const doc = this.collection.doc(`${newId}`);
       let item = await doc.create({ elem });
       return item;
     } catch (error) {
@@ -40,7 +54,7 @@ class ContenedorFirebase {
 
   async actualizar(elem, id) {
     try {
-      const doc = this.coll.doc(`${id}`);
+      const doc = this.collection.doc(`${id}`);
       let item = await doc.update({ elem });
       return item;
     } catch (error) {
@@ -50,7 +64,7 @@ class ContenedorFirebase {
 
   async borrar(id) {
     try {
-      const doc = this.coll.doc(`${id}`);
+      const doc = this.collection.doc(`${id}`);
       let item = await doc.delete();
       return item;
     } catch (error) {
@@ -60,14 +74,14 @@ class ContenedorFirebase {
 
   async borrarAll() {
     try {
-      return await this.coll.delete();
+      return await this.collection.delete();
     } catch (error) {
       throw new Error(`Error al borrar: ${error}`);
     }
   }
 
   async desconectar() {
-    await goOffline(this.firebase);
+    await goOffline(db);
   }
 }
 

@@ -11,6 +11,10 @@ import {
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("Hola, soy Sagar");
+});
+
 //--------------------------------------------
 // permisos de administrador MIDDLEWARES
 
